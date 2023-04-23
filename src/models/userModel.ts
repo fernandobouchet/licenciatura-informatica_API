@@ -1,5 +1,5 @@
-import { Ref, prop } from '@typegoose/typegoose';
-import { Career } from './careerModel';
+import { Ref, getModelForClass, prop } from '@typegoose/typegoose';
+import { Career } from './index';
 
 class User {
   @prop({ required: true })
@@ -14,11 +14,13 @@ class User {
   @prop({ ref: () => Career })
   careers: Ref<Career>[];
 
-  @prop({ required: true })
+  @prop()
   courses: string[];
 
   @prop()
   comments: string[];
 }
 
-export { User };
+const Users = getModelForClass(User);
+
+export { User, Users };

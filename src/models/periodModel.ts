@@ -1,4 +1,4 @@
-import { prop, Ref } from '@typegoose/typegoose';
+import { getModelForClass, prop, Ref } from '@typegoose/typegoose';
 import { Career } from './careerModel';
 import { Course } from './courseModel';
 
@@ -6,11 +6,13 @@ class Period {
   @prop({ required: true })
   periodNumber: number;
 
-  @prop({ ref: () => Career })
-  carreraId: Ref<Career>;
+  @prop({ required: true, ref: () => Career })
+  careerId: Ref<Career>;
 
   @prop({ ref: () => Course })
-  materias: Ref<Course>[];
+  courses: Ref<Course>[];
 }
 
-export { Period };
+const Periods = getModelForClass(Period);
+
+export { Period, Periods };

@@ -1,7 +1,7 @@
-import { prop, Ref } from '@typegoose/typegoose';
+import { getModelForClass, prop, Ref } from '@typegoose/typegoose';
 
 class Course {
-  @prop({ required: true, unique: true })
+  @prop({ required: true })
   name: string;
 
   @prop({ required: true, unique: true })
@@ -35,4 +35,6 @@ class Course {
   equivalents: Ref<Course>[];
 }
 
-export { Course };
+const Courses = getModelForClass(Course);
+
+export { Course, Courses };

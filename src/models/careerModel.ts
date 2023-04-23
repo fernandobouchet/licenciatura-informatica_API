@@ -1,4 +1,4 @@
-import { prop } from '@typegoose/typegoose';
+import { getModelForClass, prop } from '@typegoose/typegoose';
 
 class Career {
   @prop({ required: true, unique: true })
@@ -8,4 +8,6 @@ class Career {
   name: string;
 }
 
-export { Career };
+const Careers = getModelForClass(Career);
+
+export { Career, Careers };
