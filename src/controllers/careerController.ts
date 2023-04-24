@@ -6,8 +6,12 @@ const getAllCareers = async (_req: Request, res: Response) => {
     const careers = await Careers.find();
     res.status(200).send(careers);
   } catch (error) {
-    console.error(error);
-    res.status(500).send({ message: 'Error finding careers' });
+    let message = 'Unknown error';
+    if (error instanceof Error) {
+      message = `Error: ${error.message}`;
+    }
+    console.log(error);
+    res.status(500).send({ message: message });
   }
 };
 
@@ -19,8 +23,12 @@ const getCareerPeriodsById = async (req: Request, res: Response) => {
     );
     res.status(200).json(periods);
   } catch (error) {
-    console.error(error);
-    res.status(500).send({ message: 'Error finding career periods' });
+    let message = 'Unknown error';
+    if (error instanceof Error) {
+      message = `Error: ${error.message}`;
+    }
+    console.log(error);
+    res.status(500).send({ message: message });
   }
 };
 
@@ -33,8 +41,12 @@ const addCareer = async (req: Request, res: Response) => {
     });
     res.status(200).json(career);
   } catch (error) {
-    console.error(error);
-    res.status(500).send({ message: 'Error adding career' });
+    let message = 'Unknown error';
+    if (error instanceof Error) {
+      message = `Error: ${error.message}`;
+    }
+    console.log(error);
+    res.status(500).send({ message: message });
   }
 };
 
@@ -54,8 +66,12 @@ const updateCareerById = async (req: Request, res: Response) => {
       res.status(200).send(updatedCareer);
     }
   } catch (error) {
-    console.error(error);
-    res.status(500).send({ message: 'Error updating career' });
+    let message = 'Unknown error';
+    if (error instanceof Error) {
+      message = `Error: ${error.message}`;
+    }
+    console.log(error);
+    res.status(500).send({ message: message });
   }
 };
 
@@ -70,8 +86,12 @@ const deleteCareerById = async (req: Request, res: Response) => {
       res.status(200).json({ id: receivedId });
     }
   } catch (error) {
-    console.error(error);
-    res.status(500).send({ message: 'Error deleting career' });
+    let message = 'Unknown error';
+    if (error instanceof Error) {
+      message = `Error: ${error.message}`;
+    }
+    console.log(error);
+    res.status(500).send({ message: message });
   }
 };
 

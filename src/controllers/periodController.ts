@@ -6,7 +6,12 @@ const getAllPeriods = async (_req: Request, res: Response) => {
     const periods = await Periods.find();
     res.status(200).json(periods);
   } catch (error) {
-    res.status(500).send({ message: 'Error getting all periods' });
+    let message = 'Unknown error';
+    if (error instanceof Error) {
+      message = `Error: ${error.message}`;
+    }
+    console.log(error);
+    res.status(500).send({ message: message });
   }
 };
 
@@ -15,7 +20,12 @@ const getPeriodById = async (req: Request, res: Response) => {
     const periods = await Periods.findById(req.params.id).populate('courses');
     res.status(200).json(periods);
   } catch (error) {
-    res.status(500).send({ message: 'Error getting period' });
+    let message = 'Unknown error';
+    if (error instanceof Error) {
+      message = `Error: ${error.message}`;
+    }
+    console.log(error);
+    res.status(500).send({ message: message });
   }
 };
 
@@ -28,7 +38,12 @@ const addPeriod = async (req: Request, res: Response) => {
     });
     res.status(200).json(period);
   } catch (error) {
-    res.status(500).send({ message: 'Error adding period' });
+    let message = 'Unknown error';
+    if (error instanceof Error) {
+      message = `Error: ${error.message}`;
+    }
+    console.log(error);
+    res.status(500).send({ message: message });
   }
 };
 
@@ -49,8 +64,12 @@ const updatePeriodById = async (req: Request, res: Response) => {
       res.status(200).send(updatedPeriod);
     }
   } catch (error) {
-    console.error(error);
-    res.status(500).send({ message: 'Error updating period' });
+    let message = 'Unknown error';
+    if (error instanceof Error) {
+      message = `Error: ${error.message}`;
+    }
+    console.log(error);
+    res.status(500).send({ message: message });
   }
 };
 
@@ -65,7 +84,12 @@ const deletePeriodById = async (req: Request, res: Response) => {
       res.status(200).json({ id: req.params.id });
     }
   } catch (error) {
-    res.status(500).send({ message: 'Error deleting period' });
+    let message = 'Unknown error';
+    if (error instanceof Error) {
+      message = `Error: ${error.message}`;
+    }
+    console.log(error);
+    res.status(500).send({ message: message });
   }
 };
 

@@ -6,7 +6,12 @@ const getAllCourses = async (_req: Request, res: Response) => {
     const courses = await Courses.find().populate('correlatives');
     res.status(200).json(courses);
   } catch (error) {
-    res.status(500).send({ message: 'Error getting all courses' });
+    let message = 'Unknown error';
+    if (error instanceof Error) {
+      message = `Error: ${error.message}`;
+    }
+    console.log(error);
+    res.status(500).send({ message: message });
   }
 };
 
@@ -16,7 +21,12 @@ const getCourseById = async (req: Request, res: Response) => {
     const course = await Courses.findById(receivedId).populate('correlatives');
     res.status(200).json(course);
   } catch (error) {
-    res.status(500).send({ message: 'Error getting course' });
+    let message = 'Unknown error';
+    if (error instanceof Error) {
+      message = `Error: ${error.message}`;
+    }
+    console.log(error);
+    res.status(500).send({ message: message });
   }
 };
 
@@ -50,7 +60,12 @@ const addCourse = async (req: Request, res: Response) => {
     });
     res.status(200).json(course);
   } catch (error) {
-    res.status(500).send({ message: 'Error adding course' });
+    let message = 'Unknown error';
+    if (error instanceof Error) {
+      message = `Error: ${error.message}`;
+    }
+    console.log(error);
+    res.status(500).send({ message: message });
   }
 };
 
@@ -69,8 +84,12 @@ const updateCourseById = async (req: Request, res: Response) => {
       res.status(200).send(updatedCourse);
     }
   } catch (error) {
-    console.error(error);
-    res.status(500).send({ message: 'Error updating course' });
+    let message = 'Unknown error';
+    if (error instanceof Error) {
+      message = `Error: ${error.message}`;
+    }
+    console.log(error);
+    res.status(500).send({ message: message });
   }
 };
 
@@ -85,7 +104,12 @@ const deleteCourseById = async (req: Request, res: Response) => {
       res.status(200).json({ id: receivedId });
     }
   } catch (error) {
-    res.status(500).send({ message: 'Error deleting course' });
+    let message = 'Unknown error';
+    if (error instanceof Error) {
+      message = `Error: ${error.message}`;
+    }
+    console.log(error);
+    res.status(500).send({ message: message });
   }
 };
 
