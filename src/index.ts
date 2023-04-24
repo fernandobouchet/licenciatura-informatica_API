@@ -1,10 +1,12 @@
 import 'dotenv/config';
 import express from 'express';
+import helmet from 'helmet';
 import cors from 'cors';
 import { connectDB } from './database';
 import { careerRoutes, courseRoutes, periodRoutes } from './routes';
 
 const app = express();
+app.use(helmet());
 app.use(cors());
 app.use(express.json());
 
