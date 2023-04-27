@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 
 const loginCallback = (_req: Request, res: Response) => {
-  res.redirect('/api/auth');
+  res.redirect(`${process.env.CLIENT_URL}`);
 };
 
 const logout = (req: Request, res: Response, next: NextFunction) => {
@@ -13,4 +13,13 @@ const logout = (req: Request, res: Response, next: NextFunction) => {
   });
 };
 
-export { loginCallback, logout };
+const getUserInfo = (req: Request, res: Response) => {
+  if (req.isAuthenticated()) {
+    const userInfo = req.user;
+    res.send(userInfo);
+  } else {
+    res.send(null);
+  }
+};
+
+export { loginCallback, logout, getUserInfo };
