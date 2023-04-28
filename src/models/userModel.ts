@@ -2,9 +2,6 @@ import { Ref, getModelForClass, prop } from '@typegoose/typegoose';
 import { Career } from './index';
 
 class User {
-  @prop({ required: true, unique: true })
-  googleId: string;
-
   @prop({ required: true })
   username: string;
 
@@ -14,8 +11,8 @@ class User {
   @prop({ required: true })
   avatar: string;
 
-  @prop({ required: true, default: 'student' })
-  role: string;
+  @prop({ required: true, default: false })
+  isAdmin: boolean;
 
   @prop({ ref: () => Career })
   careers: Ref<Career>[];

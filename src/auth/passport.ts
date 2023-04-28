@@ -12,14 +12,13 @@ const configurePassport = (passport: PassportStatic) => {
       },
       async (_accessToken, _refreshToken, profile: Profile, done) => {
         const newUser = {
-          googleId: profile.id,
           username: profile.displayName,
           email: profile.emails ? profile.emails[0].value : ' ',
           avatar: profile.photos ? profile.photos[0].value : ' ',
         };
 
         try {
-          let user = await Users.findOne({ googleId: profile.id });
+          let user = await Users.findOne({ email: newUser.email });
           if (user) {
             done(null, user);
           } else {

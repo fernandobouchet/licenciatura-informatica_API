@@ -11,7 +11,15 @@ import { authRoutes, careerRoutes, courseRoutes, periodRoutes } from './routes';
 
 const app = express();
 app.use(helmet());
-app.use(cors({ credentials: true, origin: `${process.env.CLIENT_URL}` }));
+app.use(
+  cors({
+    credentials: true,
+    origin:
+      process.env.NODE_ENV === 'production'
+        ? `${process.env.CLIENT_URL}`
+        : `${process.env.DEV_CLIENT_URL}`,
+  })
+);
 app.use(express.json());
 
 app.use(
@@ -19,7 +27,18 @@ app.use(
     secret: process.env.SESSION_SECRET!,
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGODB_URI,
+      crypto: {
+        secret: `${process.env.MONGOSTORE_SECRET}`,
+      },
+    }),
+    cookie: {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      maxAge: 24 * 60 * 60 * 1000,
+    },
   })
 );
 
