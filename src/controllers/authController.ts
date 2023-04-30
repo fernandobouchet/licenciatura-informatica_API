@@ -23,13 +23,4 @@ const logout = async (req: Request, res: Response, next: NextFunction) => {
   });
 };
 
-const getUserInfo = async (req: Request, res: Response) => {
-  if (req.isAuthenticated()) {
-    const userInfo = req.user;
-    res.send(userInfo);
-  } else {
-    res.send(null);
-  }
-};
-
-export { loginCallback, logout, getUserInfo };
+export { loginCallback, logout };

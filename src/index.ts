@@ -7,7 +7,13 @@ import passport from 'passport';
 import { configurePassport } from './auth/passport';
 import MongoStore from 'connect-mongo';
 import { connectDB } from './database';
-import { authRoutes, careerRoutes, courseRoutes, periodRoutes } from './routes';
+import {
+  authRoutes,
+  careerRoutes,
+  courseRoutes,
+  periodRoutes,
+  userRoutes,
+} from './routes';
 
 const app = express();
 app.use(helmet());
@@ -51,6 +57,7 @@ connectDB();
 const port = process.env.PORT || 3001;
 
 app.use('/api/auth', authRoutes);
+app.use('/api/user', userRoutes);
 app.use('/api/career', careerRoutes);
 app.use('/api/period', periodRoutes);
 app.use('/api/course', courseRoutes);

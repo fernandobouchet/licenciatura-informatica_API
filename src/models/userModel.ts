@@ -1,5 +1,6 @@
 import { Ref, getModelForClass, prop } from '@typegoose/typegoose';
 import { Career } from './index';
+import { SavedCourse } from '../interfaces';
 
 class User {
   @prop({ required: true })
@@ -18,7 +19,7 @@ class User {
   careers: Ref<Career>[];
 
   @prop()
-  courses: string[];
+  courses: SavedCourse[];
 
   @prop()
   comments: string[];

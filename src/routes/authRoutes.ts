@@ -1,5 +1,5 @@
 import express from 'express';
-import { getUserInfo, loginCallback, logout } from '../controllers';
+import { loginCallback, logout } from '../controllers';
 import passport from 'passport';
 
 const router = express.Router();
@@ -21,7 +21,5 @@ router.get(
 );
 
 router.get('/logout', logout);
-
-router.get('/user', getUserInfo);
 
 export { router as authRoutes };
