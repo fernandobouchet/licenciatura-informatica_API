@@ -8,7 +8,10 @@ const configurePassport = (passport: PassportStatic) => {
       {
         clientID: `${process.env.GOOGLE_CLIENT_ID}`,
         clientSecret: `${process.env.GOOGLE_CLIENT_SECRET}`,
-        callbackURL: '/api/auth/google/callback',
+        callbackURL:
+          process.env.NODE_ENV === 'production'
+            ? `${process.env.API_URL}/api/auth/google/callback`
+            : '/api/auth/google/callback',
       },
       async (_accessToken, _refreshToken, profile: Profile, done) => {
         const newUser = {
